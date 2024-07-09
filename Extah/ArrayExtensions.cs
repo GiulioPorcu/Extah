@@ -11,8 +11,8 @@ namespace Extah
         /// <summary>
         /// Adds values to the end of this array, creating a new instance. Returns the original array if there are not other values.
         /// </summary>
-        /// <param name="array">The original array</param>
-        /// <param name="values">Any values to be added</param>
+        /// <param name="array">The original array.</param>
+        /// <param name="values">Any values to be added.</param>
         public static T[] Append<T>(this T[] array, params T[] values)
         {
             if (values == null || values.Length == 0)
@@ -37,6 +37,8 @@ namespace Extah
 
         /// <summary>
         /// Traverses the array and checks if the requested value is within.
+        /// <br></br><br></br>
+        /// <see cref="ArgumentNullException"/> - if the value is <tt>null</tt>.
         /// </summary>
         /// <param name="array">The original array.</param>
         /// <param name="value">The element to look out for.</param>
@@ -49,7 +51,7 @@ namespace Extah
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i].Equals(value))
+                if (value.Equals(array[i]))
                 {
                     return true;
                 }
@@ -60,14 +62,21 @@ namespace Extah
 
         /// <summary>
         /// Traverses the array and returns the value's index or -1 if not found.
+        /// <br></br><br></br>
+        /// <see cref="ArgumentNullException"/> - if the value is <tt>null</tt>.
         /// </summary>
         /// <param name="array">The original array.</param>
         /// <param name="value">The element to be looked for.</param>
         public static int IndexOf<T>(this T[] array, T value)
         {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i].Equals(value))
+                if (value.Equals(array[i]))
                 {
                     return i;
                 }
@@ -255,7 +264,7 @@ namespace Extah
         /// </summary>
         /// <param name="array">The original array.</param>
         /// <param name="comparer">An optional comparer to use when comparing objects.</param>
-        public static void Sort<T>(this T[] array, IComparer<T> comparer = null) where T : IComparable
+        public static void Sort<T>(this T[] array, IComparer<T>? comparer = default) where T : IComparable
         {
             if (comparer == null)
             {
@@ -272,7 +281,7 @@ namespace Extah
         /// </summary>
         /// <param name="array">The original array.</param>
         /// <param name="comparison">An optional comparison to use when comparing objects.</param>
-        public static void Sort<T>(this T[] array, Comparison<T> comparison = null) where T : IComparable
+        public static void Sort<T>(this T[] array, Comparison<T>? comparison = default) where T : IComparable
         {
             if (comparison == null)
             {
