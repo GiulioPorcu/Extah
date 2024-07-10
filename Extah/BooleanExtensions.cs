@@ -64,8 +64,8 @@ namespace Extah
         /// Returns the result of an XOR operation using this and other booleans.
         /// </summary>
         /// <param name="boolean">The original boolean value.</param>
-        /// <param name="implementation">Determines how the XOR check should be performed.</param>
-        /// <param name="values">Any values to be ORed.</param>
+        /// <param name="implementation">Determines how the XOR should be evaluated.</param>
+        /// <param name="values">Any values to be XORed.</param>
         public static bool Xor(this bool boolean, XorImplementation implementation, params bool[] values)
         {
             switch (implementation)
