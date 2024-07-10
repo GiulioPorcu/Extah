@@ -123,10 +123,13 @@
   <data name="IndexInvalid" xml:space="preserve">
     <value>Der Index ist ungültig.</value>
   </data>
-  <data name="SortingOrderInvalid" xml:space="preserve">
+  <data name="SortOrderInvalid" xml:space="preserve">
     <value>Der Wert für die Sortierreihenfolge muss gültig sein.</value>
   </data>
   <data name="SpecificIndexInvalid" xml:space="preserve">
     <value>Der Index für {0} ist ungültig.</value>
+  </data>
+  <data name="XorImplementationInvalid" xml:space="preserve">
+    <value>Der Wert für die XOR-Implementierung muss gültig sein.</value>
   </data>
 </root>

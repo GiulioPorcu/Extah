@@ -86,7 +86,7 @@ namespace Extah
             return random.NextDouble(Double.MinValue, Double.MaxValue);
         }
 
-        public static string NextString(this Random random, int length, CharacterSet characters)
+        public static string NextString(this Random random, int length)
         {
             StringBuilder stringBuilder = new StringBuilder();
 

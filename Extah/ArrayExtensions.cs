@@ -4,12 +4,12 @@ using Extah.Properties;
 namespace Extah
 {
     /// <summary>
-    /// Provides extensions for arrays.
+    /// Provides extensions for <see cref="Array"/>.
     /// </summary>
     public static class ArrayExtensions
     {
         /// <summary>
-        /// Adds values to the end of this array, creating a new instance. Returns the original array if there are not other values.
+        /// Adds values to the end of this array, creating a new instance. Returns the original array if there are no other values.
         /// </summary>
         /// <param name="array">The original array.</param>
         /// <param name="values">Any values to be added.</param>
@@ -44,24 +44,11 @@ namespace Extah
         /// <param name="value">The element to look out for.</param>
         public static bool Contains<T>(this T[] array, T value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (value.Equals(array[i]))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return IndexOf(array, value) >= 0;
         }
 
         /// <summary>
-        /// Traverses the array and returns the value's index or -1 if not found.
+        /// Traverses the array and returns the value's index or -1 if not found. If the value appears multiple times, returns the first occurrence.
         /// <br></br><br></br>
         /// <see cref="ArgumentNullException"/> - if the value is <tt>null</tt>.
         /// </summary>
@@ -91,33 +78,40 @@ namespace Extah
         /// <see cref="ArgumentException"/> - if the sorting order is not a valid value.
         /// </summary>
         /// <param name="array">The original array.</param>
-        /// <param name="sortingOrder">The sorting order.</param>
-        public static bool IsSorted<T>(this T[] array, SortOrder sortingOrder) where T : IComparable
+        /// <param name="sortOrder">The sorting order.</param>
+        public static bool IsSorted<T>(this T[] array, SortOrder sortOrder = SortOrder.Ascending) where T : IComparable
         {
-            if (sortingOrder is not SortOrder.Ascending and not SortOrder.Descending)
+            switch (sortOrder)
             {
-                throw new ArgumentException(Resources.SortingOrderInvalid);
-            }
+                case SortOrder.Ascending:
+                    {
+                        for (int i = 1; i < array.Length; i++)
+                        {
+                            if (array[i].CompareTo(array[i - 1]) < 0)
+                            {
+                                return false;
+                            }
+                        }
 
-            if (sortingOrder == SortOrder.Ascending)
-            {
-                for (int i = 1; i < array.Length; i++)
-                {
-                    if (array[i].CompareTo(array[i - 1]) < 0)
-                    {
-                        return false;
+                        break;
                     }
-                }
-            }
-            else
-            {
-                for (int i = 1; i < array.Length; i++)
-                {
-                    if (array[i].CompareTo(array[i - 1]) > 0)
+
+                case SortOrder.Descending:
                     {
-                        return false;
+                        for (int i = 1; i < array.Length; i++)
+                        {
+                            if (array[i].CompareTo(array[i - 1]) > 0)
+                            {
+                                return false;
+                            }
+                        }
+
+                        break;
                     }
-                }
+
+                case SortOrder.None:
+                default:
+                    throw new ArgumentException(Message.SortOrderInvalid);
             }
 
             return true;
@@ -126,14 +120,14 @@ namespace Extah
         /// <summary>
         /// Returns the lowest value of the array.
         /// <br></br><br></br>
-        /// <see cref="ArgumentException"/> - if the number of values is zero.
+        /// <see cref="ArgumentException"/> - if the array's length is zero.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static T Min<T>(this T[] array) where T : IComparable
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException(Resources.ArrayEmpty);
+                throw new ArgumentException(Message.ArrayEmpty);
             }
 
             T min = array[0];
@@ -150,16 +144,16 @@ namespace Extah
         }
 
         /// <summary>
-        /// Returns the highest value of the array.
+        /// Returns the biggest value of the array.
         /// <br></br><br></br>
-        /// <see cref="ArgumentException"/> - if the number of values is zero.
+        /// <see cref="ArgumentException"/> - if the array's length is zero.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static T Max<T>(this T[] array) where T : IComparable
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException(Resources.ArrayEmpty);
+                throw new ArgumentException(Message.ArrayEmpty);
             }
 
             T max = array[0];
@@ -176,22 +170,27 @@ namespace Extah
         }
 
         /// <summary>
-        /// Removes the specified element by creating a new array.
+        /// Removes the specified element by creating a new array without it.
         /// <br></br><br></br>
         /// <see cref="ArgumentException"/> - if the array is empty or the index is not valid for this array.
         /// </summary>
         /// <param name="array">The original array.</param>
-        /// <param name="index">An index integer.</param>
+        /// <param name="index">An index.</param>
         public static T[] RemoveAt<T>(this T[] array, int index)
         {
             if (array.Length == 0)
             {
-                throw new ArgumentException(Resources.ArrayEmpty);
+                throw new ArgumentException(Message.ArrayEmpty);
             }
 
             if (index < 0 || index >= array.Length)
             {
-                throw new ArgumentException(Resources.IndexInvalid);
+                throw new ArgumentException(Message.IndexInvalid);
+            }
+
+            if (array.Length == 1)
+            {
+                return [];
             }
 
             T[] newArray = new T[array.Length - 1];
@@ -214,48 +213,44 @@ namespace Extah
         }
 
         /// <summary>
-        /// Removes the first element by creating a new array.
+        /// Removes the first element by creating a new array without it.
         /// <br></br><br></br>
         /// <see cref="ArgumentException"/> - if the array is empty.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static T[] RemoveFirst<T>(this T[] array)
         {
-            return array.Length == 0 ? throw new ArgumentException(Resources.ArrayEmpty) : array.RemoveAt(0);
+            return RemoveAt(array, 0);
         }
 
         /// <summary>
-        /// Removes the last element by creating a new array.
+        /// Removes the last element by creating a new array without it.
         /// <br></br><br></br>
         /// <see cref="ArgumentException"/> - if the array is empty.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static T[] RemoveLast<T>(this T[] array)
         {
-            return array.Length == 0 ? throw new ArgumentException(Resources.ArrayEmpty) : array.RemoveAt(array.Length - 1);
+            return RemoveAt(array, array.Length - 1);
         }
 
         /// <summary>
         /// Shuffles this array's content using a modified Fisher-Yates shuffle, or leaves it as is if less than two elements are available.
-        /// <br></br><br></br>
-        /// <see cref="ArgumentException"/> - if the array is empty.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static void Shuffle<T>(this T[] array)
         {
-            if (array.Length == 0)
+            if (array.Length > 1)
             {
-                throw new ArgumentException(Resources.ArrayEmpty);
-            }
+                Random random = new Random();
 
-            Random random = new Random();
+                for (int i = array.Length - 1; i >= 0; i--)
+                {
+                    int index1 = (int)(random.NextDouble() * i);
+                    int index2 = (int)(random.NextDouble() * i);
 
-            for (int i = array.Length - 1; i >= 0; i--)
-            {
-                int index1 = (int)(random.NextDouble() * i);
-                int index2 = (int)(random.NextDouble() * i);
-
-                array.Swap(index1, index2);
+                    Swap(array, index1, index2);
+                }
             }
         }
 
@@ -305,19 +300,19 @@ namespace Extah
         {
             if (index1 < 0 || index1 >= array.Length)
             {
-                throw new ArgumentException(String.Format(Resources.SpecificIndexInvalid, nameof(index1)));
+                throw new ArgumentException(String.Format(Message.SpecificIndexInvalid, nameof(index1)));
             }
 
             if (index2 < 0 || index2 >= array.Length)
             {
-                throw new ArgumentException(String.Format(Resources.SpecificIndexInvalid, nameof(index2)));
+                throw new ArgumentException(String.Format(Message.SpecificIndexInvalid, nameof(index2)));
             }
 
             (array[index1], array[index2]) = (array[index2], array[index1]);
         }
 
         /// <summary>
-        /// Copies all contents from this array into a <see cref="List{T}"/> of the same size and type.
+        /// Copies all contents from this array into a new <see cref="List{T}"/> of the same size and type.
         /// </summary>
         /// <param name="array">The original array.</param>
         public static IList<T> ToList<T>(this T[] array)

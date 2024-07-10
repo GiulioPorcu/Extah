@@ -1,12 +1,12 @@
 ﻿namespace Extah.Data
 {
     /// <summary>
-    /// Provides named constants for the sorting <see langword="orderby"/>.
+    /// Provides named constants for the sorting order.
     /// </summary>
     public enum SortOrder
     {
         /// <summary>
-        /// The default, no sort order.
+        /// No sort order.
         /// </summary>
         None,
 

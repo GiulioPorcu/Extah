@@ -22,14 +22,14 @@ namespace Extah.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources___Copy {
+    internal class Message {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources___Copy() {
+        internal Message() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Extah.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Amethyst.Properties.Resources - Copy", typeof(Resources___Copy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Extah.Properties.Message", typeof(Message).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,51 @@ namespace Extah.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The array is empty..
+        /// </summary>
+        internal static string ArrayEmpty {
+            get {
+                return ResourceManager.GetString("ArrayEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The index is invalid..
+        /// </summary>
+        internal static string IndexInvalid {
+            get {
+                return ResourceManager.GetString("IndexInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The sorting order has to be a valid value..
+        /// </summary>
+        internal static string SortOrderInvalid {
+            get {
+                return ResourceManager.GetString("SortOrderInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The index for {0} is invalid..
+        /// </summary>
+        internal static string SpecificIndexInvalid {
+            get {
+                return ResourceManager.GetString("SpecificIndexInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The XOR implementation has to be a valid value..
+        /// </summary>
+        internal static string XorImplementationInvalid {
+            get {
+                return ResourceManager.GetString("XorImplementationInvalid", resourceCulture);
             }
         }
     }
