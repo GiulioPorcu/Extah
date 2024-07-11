@@ -56,10 +56,7 @@ namespace Extah
         /// <param name="value">The element to be looked for.</param>
         public static int IndexOf<T>(this T[] array, T value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            ArgumentNullException.ThrowIfNull(value);
 
             for (int i = 0; i < array.Length; i++)
             {
