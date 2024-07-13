@@ -3,7 +3,7 @@
 namespace Extah
 {
     /// <summary>
-    /// Provides extensions to <see cref="ICollection"/> objects.
+    /// Provides extensions for <see cref="ICollection"/> objects.
     /// </summary>
     public static class CollectionExtensions
     {

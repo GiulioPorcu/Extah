@@ -1,15 +1,14 @@
 ﻿namespace Extah
 {
     /// <summary>
-    /// Provides extensions to <see cref="DateTime"/> objects.
+    /// Provides extensions for <see cref="DateTime"/> objects.
     /// </summary>
     public static class DateTimeExtensions
     {
         /// <summary>
         /// Returns this object formatted as hh:mm:ss.
         /// </summary>
-        /// <param name="dateTime">The original <see cref="DateTime"/></param>
-        /// <returns>The time as a string</returns>
+        /// <param name="dateTime">The original datetime.</param>
         public static string GetTimeString(this DateTime dateTime)
         {
             return $"{dateTime.Hour:D2}:{dateTime.Minute:D2}:{dateTime.Second:D2}";
@@ -18,8 +17,7 @@
         /// <summary>
         /// Returns this object formatted as dd.mm.yyyy.
         /// </summary>
-        /// <param name="dateTime">The original <see cref="DateTime"/></param>
-        /// <returns>The date as a string</returns>
+        /// <param name="dateTime">The original datetime.</param>
         public static string GetDateString(this DateTime dateTime)
         {
             return $"{dateTime.Day:D2}.{dateTime.Month:D2}.{dateTime.Year:D4}";
@@ -28,8 +26,7 @@
         /// <summary>
         /// Gets the current time in format "dd.MM.yy hh:mm:ss".
         /// </summary>
-        /// <param name="dateTime">The original <see cref="DateTime"/></param>
-        /// <returns>The date and time as a string</returns>
+        /// <param name="dateTime">The original datetime.</param>
         public static string GetCurrentDateTimeString1(this DateTime dateTime)
         {
             int year = dateTime.Year % 100;
@@ -45,8 +42,7 @@
         /// <summary>
         /// Gets the current time in format "yyyy-MM-dd HH:mm:ss".
         /// </summary>
-        /// <param name="dateTime">The original <see cref="DateTime"/></param>
-        /// <returns>The date and time as a string</returns>
+        /// <param name="dateTime">The original datetime.</param>
         public static string GetCurrentDateTimeString2(this DateTime dateTime)
         {
             int year = dateTime.Year;
@@ -62,8 +58,7 @@
         /// <summary>
         /// Gets the current time in format "yyyyMMdd_HHmmss".
         /// </summary>
-        /// <param name="dateTime">The original <see cref="DateTime"/></param>
-        /// <returns>The date and time as a string</returns>
+        /// <param name="dateTime">The original datetime.</param>
         public static string GetCurrentDateTimeString3(this DateTime dateTime)
         {
             int year = dateTime.Year;
