@@ -1,23 +1,22 @@
-﻿namespace Extah.Data
+﻿namespace Extah.Data;
+
+/// <summary>
+/// Provides named constants for the sorting order.
+/// </summary>
+public enum SortOrder
 {
     /// <summary>
-    /// Provides named constants for the sorting order.
+    /// No sort order.
     /// </summary>
-    public enum SortOrder
-    {
-        /// <summary>
-        /// No sort order.
-        /// </summary>
-        None,
+    None,
 
-        /// <summary>
-        /// Ascending sort order.
-        /// </summary>
-        Ascending,
+    /// <summary>
+    /// Ascending sort order.
+    /// </summary>
+    Ascending,
 
-        /// <summary>
-        /// Descending sort order.
-        /// </summary>
-        Descending
-    }
+    /// <summary>
+    /// Descending sort order.
+    /// </summary>
+    Descending
 }

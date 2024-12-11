@@ -1,38 +1,37 @@
 using Shouldly;
 
-namespace Extah.Tests
+namespace Extah.Tests;
+
+[TestClass]
+public class ArrayExtensionsTests
 {
-    [TestClass]
-    public class ArrayExtensionsTests
+    [TestMethod]
+    public void CreateCombinedArray()
     {
-        [TestMethod]
-        public void CreateCombinedArray()
-        {
-            int[] three = [1, 2, 3];
-            int[] four = [1, 2, 3, 4];
-            int[] combined = three.Append(four);
+        int[] three = [1, 2, 3];
+        int[] four = [1, 2, 3, 4];
+        int[] combined = three.Append(four);
 
-            combined.ShouldBeEquivalentTo(new int[] { 1, 2, 3, 1, 2, 3, 4 });
-        }
+        combined.ShouldBeEquivalentTo(new int[] { 1, 2, 3, 1, 2, 3, 4 });
+    }
 
-        [TestMethod]
-        public void Append_EmptySecondArray()
-        {
-            int[] three = [1, 2, 3];
-            int[] four = [];
-            int[] combined = three.Append(four);
+    [TestMethod]
+    public void Append_EmptySecondArray()
+    {
+        int[] three = [1, 2, 3];
+        int[] four = [];
+        int[] combined = three.Append(four);
 
-            combined.ShouldBeEquivalentTo(three);
-        }
+        combined.ShouldBeEquivalentTo(three);
+    }
 
-        [TestMethod]
-        public void Append_NullSecondArray()
-        {
-            int[] three = [1, 2, 3];
-            int[] four = null;
-            int[] combined = three.Append(four);
+    [TestMethod]
+    public void Append_NullSecondArray()
+    {
+        int[] three = [1, 2, 3];
+        int[]? four = null;
+        int[] combined = three.Append(four!);
 
-            combined.ShouldBeEquivalentTo(three);
-        }
+        combined.ShouldBeEquivalentTo(three);
     }
 }
