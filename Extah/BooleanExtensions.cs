@@ -84,7 +84,7 @@ public static class BooleanExtensions
                     return result;
                 }
 
-            case XorImplementation.Exactly1:
+            case XorImplementation.ExactlyOne:
                 {
                     int count = boolean ? 1 : 0;
 

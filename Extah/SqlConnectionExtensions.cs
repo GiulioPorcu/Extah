@@ -27,7 +27,7 @@ public static class SqlConnectionExtensions
                 using SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    list.Add(dataReader!!!!!![0].ToString());
+                    list.Add(dataReader[0].ToString());
                 }
             }
 
